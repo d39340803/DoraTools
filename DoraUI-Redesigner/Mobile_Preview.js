@@ -1,6 +1,6 @@
-// ==========================================
-//  MOBILE PREVIEW WINDOW
-// ==========================================
+// ===========================================================
+// PART 2: MOBILE PREVIEW (Mobile-Preview.js)
+// ===========================================================
 
 /* ------------------------------------------------------------------
    JOYLAND UI REPLICA TEMPLATE BUILDER (SWAPS :root WITH USER VARS)
@@ -1289,3 +1289,28 @@ function buildJoylandPreviewHTML(customVarsData) {
 </body>
 </html>`;
 }
+
+// Launch Preview Modal Window
+const previewModal = document.getElementById("previewModal");
+const previewIframe = document.getElementById("previewIframe");
+
+function openLivePreview(varsToUse) {
+  previewIframe.srcdoc = buildJoylandPreviewHTML(varsToUse);
+  previewModal.classList.add("active");
+}
+
+document.getElementById("btnOpenPreviewMain").onclick = () => {
+  openLivePreview(state);
+};
+
+document.getElementById("btnPreviewInEdit").onclick = () => {
+  openLivePreview(stagingState);
+};
+
+document.getElementById("btnClosePreview").onclick = () => {
+  previewModal.classList.remove("active");
+};
+
+previewModal.addEventListener("click", (e) => {
+  if (e.target === previewModal) previewModal.classList.remove("active");
+});
