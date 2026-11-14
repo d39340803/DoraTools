@@ -1,6 +1,6 @@
-// ==========================================
-//  CORE LOGIC & CONFIGURATOR
-// ==========================================
+// ===========================================================
+// PART 1: CORE LOGIC (Core-Logic.js)
+// ===========================================================
 
 // Custom Doraemon Alert Helper
 const doraAlertModal = document.getElementById("doraAlertModal");
@@ -84,6 +84,7 @@ function formatAspectRatioInfo(width, height, rule) {
   const simpH = Math.round(height / gcd);
   const actualDec = width / height;
 
+  // Express user's image relative to the required denominator/numerator for easy comparison
   const scaledW = (actualDec * rule.h).toFixed(2).replace(/\.00$/, "");
   const exactRatioStr = (simpW <= 50 && simpH <= 50) ? `${simpW}:${simpH}` : `~${scaledW}:${rule.h}`;
 
@@ -91,6 +92,7 @@ function formatAspectRatioInfo(width, height, rule) {
   const diffPct = ((Math.abs(diffDec) / rule.target) * 100).toFixed(1);
   const direction = diffDec > 0 ? "wider" : "taller";
 
+  // Calculate ideal pixel dimensions based on user's current width or height
   const idealWidthForHeight = Math.round(height * rule.target);
   const idealHeightForWidth = Math.round(width / rule.target);
   const pxDiffW = width - idealWidthForHeight;
@@ -158,6 +160,7 @@ function buildErrorCardHTML(err) {
     </div>`;
 }
 
+// Validates a single URL and returns a structured result (without firing alert if silent=true)
 function checkSingleImageUrl(key, rawUrl) {
   return new Promise((resolve) => {
     const clean = (rawUrl || "").trim();
@@ -267,6 +270,7 @@ function checkSingleImageUrl(key, rawUrl) {
   });
 }
 
+// Single-field helper that shows an alert immediately if invalid
 async function validateImageUrlAndRatio(key, rawUrl) {
   const result = await checkSingleImageUrl(key, rawUrl);
   if (!result.valid && result.errorObj) {
@@ -275,6 +279,7 @@ async function validateImageUrlAndRatio(key, rawUrl) {
   return result;
 }
 
+// Batch validator for multiple images at once — reports ALL mismatches in ONE combined alert
 async function validateBatchImages(items) {
   const results = await Promise.all(
     items.map(item => checkSingleImageUrl(item.key, item.rawImgLink))
@@ -462,6 +467,7 @@ async function parseAndAssignCSSBlock(rawCssText, targetStateObj) {
     }
   }
 
+  // Validate all pasted image links in parallel and report all mismatches in ONE alert
   if (pendingImageChecks.length > 0) {
     const batchResults = await validateBatchImages(pendingImageChecks);
     batchResults.forEach(res => {
@@ -517,6 +523,7 @@ pasteModal.addEventListener("click", (e) => {
   if (e.target === pasteModal) pasteModal.classList.remove("active");
 });
 
+// Direct Image URL extraction
 function extractRawImageUrl(val) {
   if (!val) return "";
   const match = val.match(/url\(\s*['"]?(.*?)['"]?\s*\)/i);
@@ -528,6 +535,7 @@ function wrapImageUrl(url) {
   return `url('${clean}')`;
 }
 
+// Animated Custom Dropdown Builder
 function createCustomDropdown(options, currentValue, onChange) {
   const wrap = document.createElement("div");
   wrap.className = "custom-select-wrap";
@@ -662,6 +670,7 @@ function buildEditForm() {
   let borderSectionHeaderAdded = false;
 
   Object.entries(stagingState).forEach(([key, val]) => {
+    // Gradient Editor
     if (key === "--dora-bg-gradient-1") {
       const sectionTitle = document.createElement("div");
       sectionTitle.className = "section-title";
@@ -811,6 +820,7 @@ function buildEditForm() {
       return;
     }
 
+    // Dedicated Border Cards
     if (key.includes("border")) {
       if (!borderSectionHeaderAdded) {
         const sectionTitle = document.createElement("div");
@@ -835,6 +845,7 @@ function buildEditForm() {
       const controlsGrid = document.createElement("div");
       controlsGrid.className = "border-controls-grid";
 
+      // Thickness with fixed px
       const thickGroup = document.createElement("div");
       thickGroup.className = "control-subgroup";
       const thickLabel = document.createElement("span");
@@ -855,6 +866,7 @@ function buildEditForm() {
       thickGroup.appendChild(thickLabel);
       thickGroup.appendChild(unitWrap);
 
+      // Type with Animated Custom Dropdown
       const typeGroup = document.createElement("div");
       typeGroup.className = "control-subgroup";
       const typeLabel = document.createElement("span");
@@ -869,6 +881,7 @@ function buildEditForm() {
       typeGroup.appendChild(typeLabel);
       typeGroup.appendChild(customTypeDropdown);
 
+      // Color
       const colorGroup = document.createElement("div");
       colorGroup.className = "control-subgroup";
       const colorLabel = document.createElement("span");
@@ -881,6 +894,7 @@ function buildEditForm() {
       colorGroup.appendChild(colorLabel);
       colorGroup.appendChild(colorInput);
 
+      // Swatch Button
       const swatchBtn = document.createElement("button");
       swatchBtn.type = "button";
       swatchBtn.className = "color-swatch-btn checker-pattern";
@@ -895,6 +909,7 @@ function buildEditForm() {
       controlsGrid.appendChild(colorGroup);
       controlsGrid.appendChild(swatchBtn);
 
+      // Live Preview Area
       const previewLine = document.createElement("div");
       previewLine.className = "border-preview-line";
       const previewBox = document.createElement("div");
@@ -938,6 +953,7 @@ function buildEditForm() {
       return;
     }
 
+    // Dedicated Multi-Layer Shadow Configurator
     if (key.includes("shadow")) {
       const sectionTitle = document.createElement("div");
       sectionTitle.className = "section-title";
@@ -1030,6 +1046,7 @@ function buildEditForm() {
         subGrid.appendChild(createUnitInput("Blur", layer.blur, (v) => layer.blur = Math.max(0, v)));
         subGrid.appendChild(createUnitInput("Spread", layer.spread, (v) => layer.spread = v));
 
+        // Animated Custom Dropdown for Inset / Drop
         const insetGrp = document.createElement("div");
         insetGrp.className = "control-subgroup";
         const insetLbl = document.createElement("span");
@@ -1111,6 +1128,7 @@ function buildEditForm() {
       return;
     }
 
+    // Direct Image & GIF Input with Live Format + Aspect Ratio Scanner
     if (key.includes("bg-img")) {
       const row = document.createElement("div");
       row.className = "var-row";
@@ -1183,6 +1201,7 @@ function buildEditForm() {
       return;
     }
 
+    // Standard Rows (Colors, Solids)
     const row = document.createElement("div");
     row.className = "var-row";
 
@@ -1250,6 +1269,7 @@ document.getElementById("btnCancelChanges").onclick = () => {
   editModal.classList.remove("active");
 };
 
+// Batch check all 3 image fields when Apply Changes is clicked in case user typed without blurring
 document.getElementById("btnApplyChanges").onclick = async () => {
   const imgInputs = document.querySelectorAll("input[data-img-var-key]");
   const batchToVerify = [];
@@ -1268,7 +1288,7 @@ document.getElementById("btnApplyChanges").onclick = async () => {
     const results = await validateBatchImages(batchToVerify);
     const hasAnyInvalid = results.some(r => !r.valid);
     if (hasAnyInvalid) {
-      return;
+      return; // Keep modal open so user can fix the flagged images
     }
     results.forEach(r => {
       if (r.valid) stagingState[r.key] = wrapImageUrl(r.url);
@@ -1280,7 +1300,9 @@ document.getElementById("btnApplyChanges").onclick = async () => {
   editModal.classList.remove("active");
 };
 
-// Universal Clipboard Copy
+/* -----------------------------------------------------------
+   UNIVERSAL CLIPBOARD COPY (WORKS ON ANDROID WEBVIEW & LOCAL)
+------------------------------------------------------------ */
 function copyTextUniversal(text) {
   return new Promise((resolve, reject) => {
     if (navigator.clipboard && window.isSecureContext) {
@@ -1327,7 +1349,9 @@ document.getElementById("btnCopyCode").onclick = () => {
   });
 };
 
-// Color Picker Helpers & Dragging
+/* -----------------------------------------------------------
+   COLOR CONVERSION & SMART FORMAT DECIDER
+------------------------------------------------------------ */
 let currentHue = 0;
 let currentSat = 0;
 let currentVal = 1;
@@ -1431,6 +1455,9 @@ function parseStringToHsvAndAlpha(str) {
   return { h: 0, s: 0, v: 1, a: 1 };
 }
 
+/* -----------------------------------------------------------
+   COLOR PICKER UI & CONTINUOUS POINTER DRAGGING
+------------------------------------------------------------ */
 const pickerModal = document.getElementById("pickerModal");
 const spectrumBox = document.getElementById("spectrumBox");
 const spectrumCanvas = document.getElementById("spectrumCanvas");
@@ -1593,6 +1620,7 @@ pickerModal.addEventListener("click", (e) => {
   if (e.target === pickerModal) pickerModal.classList.remove("active");
 });
 
+// Initialize View
 parseGradientString(state["--dora-bg-gradient-1"]);
 parseShadowString(state["--dora-shadow-1"]);
 renderCodeView();
