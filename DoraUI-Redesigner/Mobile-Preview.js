@@ -169,6 +169,7 @@ function buildJoylandPreviewHTML(customVarsData) {
       justify-content: center;
       color: var(--dora-color-1);
       cursor: pointer;
+      box-shadow: var(--dora-shadow-1);
     }
 
     .flow-row {
@@ -305,7 +306,6 @@ function buildJoylandPreviewHTML(customVarsData) {
       line-height: 1.48;
       color: var(--dora-color-1);
       max-width: 84%;
-      box-shadow: var(--dora-shadow-1);
     }
 
     .bot-bubble em {
@@ -328,7 +328,6 @@ function buildJoylandPreviewHTML(customVarsData) {
       color: var(--dora-color-1);
       min-width: 38px;
       text-align: center;
-      box-shadow: var(--dora-shadow-1);
     }
 
     .msg-controls-row {
