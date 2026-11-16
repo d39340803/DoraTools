@@ -181,7 +181,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     border-radius: 5px;
     min-width: 28px;
     text-align: center;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .timer-colon {
@@ -313,7 +312,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     font-weight: 600;
     border-radius: 6px;
     border: var(--dora-border-2);
-    box-shadow: var(--dora-shadow-1);
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
@@ -406,7 +404,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     background-size: 240%;
     background-position: 48% 22%;
     border: var(--dora-border-1);
-    box-shadow: var(--dora-shadow-1);
   }
 
   .bot-title-wrap {
@@ -419,14 +416,12 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     font-size: 21px;
     font-weight: 800;
     color: var(--dora-color-7);
-    text-shadow: var(--dora-shadow-1);
   }
 
   .bot-author {
     font-size: 12.5px;
     color: var(--dora-color-1);
     opacity: 0.9;
-    text-shadow: var(--dora-shadow-1);
   }
 
   .bot-top-actions {
@@ -446,7 +441,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     gap: 6px;
     font-size: 13.5px;
     font-weight: 700;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .share-circle {
@@ -485,7 +479,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     font-size: 13px;
     font-weight: 600;
     color: var(--dora-color-7);
-    box-shadow: var(--dora-shadow-1);
   }
 
   .flow-wave-icon {
@@ -522,7 +515,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     color: var(--dora-color-1);
     font-size: 13px;
     font-weight: 500;
-    box-shadow: var(--dora-shadow-1);
   }
 
   /* Scenario Card */
@@ -539,7 +531,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     line-height: 1.52;
     position: relative;
     margin-bottom: 30px;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .scenario-card em {
@@ -575,7 +566,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     background-size: 240%;
     background-position: 48% 22%;
     flex-shrink: 0;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .bot-bubble {
@@ -585,7 +575,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     color: var(--dora-color-7);
     font-size: 13.8px;
     line-height: 1.55;
-    box-shadow: var(--dora-shadow-1);
     max-width: 405px;
   }
 
@@ -686,7 +675,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     color: var(--dora-color-7);
     font-size: 12.8px;
     font-weight: 500;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .chip-badge-icon {
@@ -737,7 +725,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     justify-content: center;
     color: var(--dora-color-7);
     flex-shrink: 0;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .input-bar {
@@ -748,7 +735,6 @@ function buildJoylandTabletPreviewHTML(customVarsData) {
     display: flex;
     align-items: center;
     padding: 0 6px 0 12px;
-    box-shadow: var(--dora-shadow-1);
   }
 
   .bulb-box {
