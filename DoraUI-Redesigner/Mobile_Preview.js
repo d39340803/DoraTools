@@ -1,9 +1,11 @@
 // ===========================================================
-//  MOBILE PREVIEW (Mobile-Preview.js)
+// PART 3: MOBILE PREVIEW (Mobile_Preview.js)
 // ===========================================================
 
-/* ------------------------------------------------------------------
+/*
+------------------------------------------------------------------
    JOYLAND UI REPLICA TEMPLATE BUILDER (SWAPS :root WITH USER VARS)
+   (Dummy UI HTML, CSS, and JS preserved identically)
 ------------------------------------------------------------------- */
 function buildJoylandPreviewHTML(customVarsData) {
   const customRootBlock = generateRawRootVarsOnly(customVarsData);
@@ -29,22 +31,38 @@ function buildJoylandPreviewHTML(customVarsData) {
       -webkit-font-smoothing: antialiased;
     }
 
-    body {
+    body, html {
       background-color: #0b0c10;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100%;
+      width: 100%;
       min-height: 100vh;
+      overflow: hidden;
       color: #ffffff;
     }
 
-    .phone-frame {
+    /* Responsive 9:16 Wrapper */
+    .phone-viewport-wrapper {
+      height: 100%;
       width: 100%;
-      max-width: 412px;
-      height: 100vh;
-      background-color: #16181d;
+      aspect-ratio: 9 / 16;
       position: relative;
+      overflow: hidden;
+      background-color: #16181d;
+    }
+
+    /* Fixed Base Resolution (412 x 732.44 = 9:16) Scaled Dynamically via JS */
+    .phone-frame {
+      width: 412px;
+      height: 732.44px;
+      background-color: #16181d;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: top left;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -914,302 +932,305 @@ function buildJoylandPreviewHTML(customVarsData) {
   </style>
 </head>
 <body>
-  <div class="phone-frame" id="phoneContainer">
-    <div class="chat-viewport">
-      <div>
-        <div class="chat-top-nav">
-          <div class="creator-pill">
-            <div class="creator-avatar"></div>
-            <div class="creator-meta">
-              <span class="bot-title">XYZ</span>
-              <span class="creator-handle">@XYZ</span>
-            </div>
-            <div class="fav-heart-btn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-          </div>
-
-          <div class="nav-actions">
-            <div class="glass-circle-btn">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <div class="glass-circle-btn" id="hamburgerBtn">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="16" y2="7"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="17" x2="12" y2="17"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="19" y1="13" x2="19" y2="17"/></svg>
-            </div>
-            <div class="glass-circle-btn">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="flow-row">
-          <div class="flow-badge">
-            <div class="flow-dots">
-              <span class="flow-dot-1"></span>
-              <span class="flow-dot-2"></span>
-            </div>
-            <span>Meet me in the Flow</span>
-            <span class="free-tag">FREE</span>
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: center;">
-          <div class="notice-pill">
-            Notice: Everything characters say is fictional
-          </div>
-        </div>
-
-        <div class="scenario-box">
-          <span class="scenario-label">Scenario:</span>
-          <span class="scenario-body"> It's an ordinary school morning, and Airi Tachibana is already talking before {{user}} has finished putting his bag down. As her seatmate and friend, she keeps him entertained with borrowed notes, homework complaints, and random whispers...</span>
-          <svg class="scenario-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-
-        <div class="messages-flow">
-          <div class="bot-msg-row">
-            <div class="msg-avatar"></div>
-            <div class="bot-bubble">
-              Greeting of your Bot
-            </div>
-          </div>
-
-          <div class="user-msg-row">
-            <div class="user-bubble">H</div>
-          </div>
-
-          <div class="bot-msg-row">
-            <div class="msg-avatar"></div>
-            <div class="bot-bubble">
-              H...hmm? What's up, {{user}}? <em>Airi tilts her head, curious</em><br>
-              You look like you've got something on your mind.<br>
-              Everything okay?
-            </div>
-          </div>
-
-          <div class="msg-controls-row">
-            <div class="reaction-group">
-              <div class="action-circle">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+  <div class="phone-viewport-wrapper" id="phoneViewportWrapper">
+    <div class="phone-frame" id="phoneContainer">
+      <div class="chat-viewport">
+        <div>
+          <div class="chat-top-nav">
+            <div class="creator-pill">
+              <div class="creator-avatar"></div>
+              <div class="creator-meta">
+                <span class="bot-title">XYZ</span>
+                <span class="creator-handle">@XYZ</span>
               </div>
-              <div class="action-circle">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
-              </div>
-              <div class="action-circle">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              <div class="fav-heart-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
             </div>
 
-            <div class="action-circle refresh">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg>
+            <div class="nav-actions">
+              <div class="glass-circle-btn">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <div class="glass-circle-btn" id="hamburgerBtn">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="16" y2="7"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="17" x2="12" y2="17"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="19" y1="13" x2="19" y2="17"/></svg>
+              </div>
+              <div class="glass-circle-btn">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="flow-row">
+            <div class="flow-badge">
+              <div class="flow-dots">
+                <span class="flow-dot-1"></span>
+                <span class="flow-dot-2"></span>
+              </div>
+              <span>Meet me in the Flow</span>
+              <span class="free-tag">FREE</span>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: center;">
+            <div class="notice-pill">
+              Notice: Everything characters say is fictional
+            </div>
+          </div>
+
+          <div class="scenario-box">
+            <span class="scenario-label">Scenario:</span>
+            <span class="scenario-body"> It's an ordinary school morning, and Airi Tachibana is already talking before {{user}} has finished putting his bag down. As her seatmate and friend, she keeps him entertained with borrowed notes, homework complaints, and random whispers...</span>
+            <svg class="scenario-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+
+          <div class="messages-flow">
+            <div class="bot-msg-row">
+              <div class="msg-avatar"></div>
+              <div class="bot-bubble">
+                Greeting of your Bot
+              </div>
+            </div>
+
+            <div class="user-msg-row">
+              <div class="user-bubble">H</div>
+            </div>
+
+            <div class="bot-msg-row">
+              <div class="msg-avatar"></div>
+              <div class="bot-bubble">
+                H...hmm? What's up, {{user}}? <em>Airi tilts her head, curious</em><br>
+                You look like you've got something on your mind.<br>
+                Everything okay?
+              </div>
+            </div>
+
+            <div class="msg-controls-row">
+              <div class="reaction-group">
+                <div class="action-circle">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                </div>
+                <div class="action-circle">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
+                </div>
+                <div class="action-circle">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </div>
+              </div>
+
+              <div class="action-circle refresh">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38"/></svg>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="bottom-dock">
-        <div class="feature-pills-bar">
-          <div class="feature-pill">
-            <span style="display:inline-flex; background:#f5b041; color:#111; font-size:8px; font-weight:800; padding:1px 3px; border-radius:3px;">HD</span>
-            <span>Photo</span>
-          </div>
-          <div class="feature-pill" id="freeModelBtn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="#2ecc71"><path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z"/></svg>
-            <span id="activeModelLabel">Free Model</span>
-          </div>
-          <div class="feature-pill">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-            <span>Memory</span>
-            <span class="crown-badge">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="#ffffff"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5v-2z"/></svg>
-            </span>
-          </div>
-          <div class="feature-pill" id="personaBtn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 5a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm0 12.2a7.2 7.2 0 0 1-6-3.22c.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08a7.2 7.2 0 0 1-6 3.22z"/></svg>
-            <span>Persona: {{user}}</span>
-          </div>
-        </div>
-
-        <div class="input-section">
-          <div class="chat-input-bar">
-            <div class="bulb-circle">
-              <svg width="19" height="19" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm1 11h-2V7h2v6z"/></svg>
+        <div class="bottom-dock">
+          <div class="feature-pills-bar">
+            <div class="feature-pill">
+              <span style="display:inline-flex; background:#f5b041; color:#111; font-size:8px; font-weight:800; padding:1px 3px; border-radius:3px;">HD</span>
+              <span>Photo</span>
             </div>
-            <div class="input-placeholder">Type a message</div>
-            <div class="send-btn">
-              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            <div class="feature-pill" id="freeModelBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#2ecc71"><path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z"/></svg>
+              <span id="activeModelLabel">Free Model</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="drawer-backdrop" id="drawerBackdrop"></div>
-
-    <div class="chat-setting-drawer" id="chatSettingDrawer">
-      <div class="drawer-handle-container" id="settingDrawerHandle">
-        <div class="drawer-handle"></div>
-      </div>
-      <div class="drawer-title">Chat Setting</div>
-
-      <div class="setting-credit-card">
-        <div class="credit-left">
-          <div class="coin-icon"></div>
-          <span>Credit</span>
-        </div>
-        <span class="credit-value">300</span>
-      </div>
-
-      <div class="setting-item-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
-        <span>Save and Start New Chat</span>
-      </div>
-
-      <div class="setting-item-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        <span>View Saved Chats</span>
-      </div>
-
-      <div class="setting-item-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        <span>Edit Character (enabled)</span>
-      </div>
-
-      <div class="setting-item-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span>Comments</span>
-      </div>
-
-      <div class="setting-item-card">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
-        <span>Share Story</span>
-      </div>
-    </div>
-
-    <div class="persona-drawer" id="personaDrawer">
-      <div>
-        <div class="persona-header">
-          <div class="drawer-handle-container" id="personaDrawerHandle">
-            <div class="drawer-handle"></div>
-          </div>
-          <div class="drawer-title" style="margin-bottom: 0;">Persona</div>
-          <div class="persona-close-btn" id="personaCloseBtn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </div>
-        </div>
-
-        <div class="persona-card">
-          <div class="persona-card-top">
-            <div class="persona-name-group">
-              <span class="persona-name">Xyz</span>
-              <span class="gender-icon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="10" cy="14" r="5"></circle>
-                  <line x1="19" y1="5" x2="13.6" y2="10.4"></line>
-                  <polyline points="15 5 19 5 19 9"></polyline>
-                </svg>
+            <div class="feature-pill">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+              <span>Memory</span>
+              <span class="crown-badge">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="#ffffff"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5v-2z"/></svg>
               </span>
-              <span class="default-badge">Default</span>
             </div>
-            <div class="persona-dots">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="5" cy="12" r="1.8"></circle>
-                <circle cx="12" cy="12" r="1.8"></circle>
-                <circle cx="19" cy="12" r="1.8"></circle>
+            <div class="feature-pill" id="personaBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 5a3 3 0 1 1-3 3 3 3 0 0 1 3-3zm0 12.2a7.2 7.2 0 0 1-6-3.22c.03-1.99 4-3.08 6-3.08s5.97 1.09 6 3.08a7.2 7.2 0 0 1-6 3.22z"/></svg>
+              <span>Persona: {{user}}</span>
+            </div>
+          </div>
+
+          <div class="input-section">
+            <div class="chat-input-bar">
+              <div class="bulb-circle">
+                <svg width="19" height="19" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm1 11h-2V7h2v6z"/></svg>
+              </div>
+              <div class="input-placeholder">Type a message</div>
+              <div class="send-btn">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+      <div class="chat-setting-drawer" id="chatSettingDrawer">
+        <div class="drawer-handle-container" id="settingDrawerHandle">
+          <div class="drawer-handle"></div>
+        </div>
+        <div class="drawer-title">Chat Setting</div>
+
+        <div class="setting-credit-card">
+          <div class="credit-left">
+            <div class="coin-icon"></div>
+            <span>Credit</span>
+          </div>
+          <span class="credit-value">300</span>
+        </div>
+
+        <div class="setting-item-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><polyline points="3 3 3 8 8 8"/></svg>
+          <span>Save and Start New Chat</span>
+        </div>
+
+        <div class="setting-item-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <span>View Saved Chats</span>
+        </div>
+
+        <div class="setting-item-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Edit Character (enabled)</span>
+        </div>
+
+        <div class="setting-item-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Comments</span>
+        </div>
+
+        <div class="setting-item-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 14 20 9 15 4"/><path d="M4 20v-7a4 4 0 0 1 4-4h12"/></svg>
+          <span>Share Story</span>
+        </div>
+      </div>
+
+      <div class="persona-drawer" id="personaDrawer">
+        <div>
+          <div class="persona-header">
+            <div class="drawer-handle-container" id="personaDrawerHandle">
+              <div class="drawer-handle"></div>
+            </div>
+            <div class="drawer-title" style="margin-bottom: 0;">Persona</div>
+            <div class="persona-close-btn" id="personaCloseBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </div>
           </div>
 
-          <div class="persona-desc">My hobbies are .....</div>
+          <div class="persona-card">
+            <div class="persona-card-top">
+              <div class="persona-name-group">
+                <span class="persona-name">Xyz</span>
+                <span class="gender-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="10" cy="14" r="5"></circle>
+                    <line x1="19" y1="5" x2="13.6" y2="10.4"></line>
+                    <polyline points="15 5 19 5 19 9"></polyline>
+                  </svg>
+                </span>
+                <span class="default-badge">Default</span>
+              </div>
+              <div class="persona-dots">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="5" cy="12" r="1.8"></circle>
+                  <circle cx="12" cy="12" r="1.8"></circle>
+                  <circle cx="19" cy="12" r="1.8"></circle>
+                </svg>
+              </div>
+            </div>
 
-          <div class="persona-card-bottom">
-            <button class="persona-remove-btn">Remove</button>
+            <div class="persona-desc">My hobbies are .....</div>
+
+            <div class="persona-card-bottom">
+              <button class="persona-remove-btn">Remove</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="persona-footer">
+          <div class="persona-upgrade-banner">
+            <div class="upgrade-text-col">
+              <div class="upgrade-title">Persona <span>(1/3)</span></div>
+              <div class="upgrade-sub">Upgrade your plan to create more personas</div>
+            </div>
+            <div class="get-pro-btn">
+              <svg class="pro-crown-corner" viewBox="0 0 24 24" fill="#f1c40f">
+                <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/>
+              </svg>
+              <span>Get Pro</span>
+            </div>
+          </div>
+
+          <div class="create-persona-btn">
+            Create New Persona
           </div>
         </div>
       </div>
 
-      <div class="persona-footer">
-        <div class="persona-upgrade-banner">
-          <div class="upgrade-text-col">
-            <div class="upgrade-title">Persona <span>(1/3)</span></div>
-            <div class="upgrade-sub">Upgrade your plan to create more personas</div>
+      <div class="model-modal" id="modelModal">
+        <div class="model-close-circle" id="modelCloseBtn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+
+        <div class="model-modal-title">
+          Choose the model<br>that suits you best
+        </div>
+
+        <div class="model-list-scroll" id="modelList">
+          <div class="model-option-card selected" data-model="Free Model">
+            <div class="model-check-corner">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="model-card-header"><span class="model-card-name">Free Model</span></div>
+            <div class="model-bullets">
+              <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Basic AI conversation</span></div>
+              <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Supports both casual chat and roleplay</span></div>
+            </div>
           </div>
-          <div class="get-pro-btn">
-            <svg class="pro-crown-corner" viewBox="0 0 24 24" fill="#f1c40f">
-              <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/>
-            </svg>
-            <span>Get Pro</span>
+
+          <div class="model-option-card" data-model="Roleplay">
+            <div class="model-check-corner">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="model-card-header">
+              <span class="model-card-name">Roleplay</span>
+              <span class="model-pro-pill"><svg viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/></svg>Pro</span>
+            </div>
+            <div class="model-bullets">
+              <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Great for acting out specific scenarios</span></div>
+              <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Unlock your imagination</span></div>
+            </div>
+          </div>
+
+          <div class="model-option-card" data-model="StoryStream">
+            <div class="model-check-corner">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="model-card-header">
+              <span class="model-card-name">StoryStream</span>
+              <span class="model-pro-pill"><svg viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/></svg>Pro</span>
+            </div>
+            <div class="model-bullets">
+              <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Step into deeper roleplay</span></div>
+              <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Let characters and plots grow</span></div>
+            </div>
           </div>
         </div>
 
-        <div class="create-persona-btn">
-          Create New Persona
+        <div class="model-modal-footer">
+          <button class="use-it-btn" id="useModelBtn">Use it</button>
         </div>
-      </div>
-    </div>
-
-    <div class="model-modal" id="modelModal">
-      <div class="model-close-circle" id="modelCloseBtn">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </div>
-
-      <div class="model-modal-title">
-        Choose the model<br>that suits you best
-      </div>
-
-      <div class="model-list-scroll" id="modelList">
-        <div class="model-option-card selected" data-model="Free Model">
-          <div class="model-check-corner">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          </div>
-          <div class="model-card-header"><span class="model-card-name">Free Model</span></div>
-          <div class="model-bullets">
-            <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Basic AI conversation</span></div>
-            <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Supports both casual chat and roleplay</span></div>
-          </div>
-        </div>
-
-        <div class="model-option-card" data-model="Roleplay">
-          <div class="model-check-corner">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          </div>
-          <div class="model-card-header">
-            <span class="model-card-name">Roleplay</span>
-            <span class="model-pro-pill"><svg viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/></svg>Pro</span>
-          </div>
-          <div class="model-bullets">
-            <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Great for acting out specific scenarios</span></div>
-            <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Unlock your imagination</span></div>
-          </div>
-        </div>
-
-        <div class="model-option-card" data-model="StoryStream">
-          <div class="model-check-corner">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          </div>
-          <div class="model-card-header">
-            <span class="model-card-name">StoryStream</span>
-            <span class="model-pro-pill"><svg viewBox="0 0 24 24"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/></svg>Pro</span>
-          </div>
-          <div class="model-bullets">
-            <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Step into deeper roleplay</span></div>
-            <div class="model-bullet-line"><span class="bullet-dot">·</span><span>Let characters and plots grow</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="model-modal-footer">
-        <button class="use-it-btn" id="useModelBtn">Use it</button>
       </div>
     </div>
   </div>
 
   <script>
+    const phoneWrapper = document.getElementById('phoneViewportWrapper');
     const phoneContainer = document.getElementById('phoneContainer');
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const personaBtn = document.getElementById('personaBtn');
@@ -1223,6 +1244,23 @@ function buildJoylandPreviewHTML(customVarsData) {
     const modelCloseBtn = document.getElementById('modelCloseBtn');
     const useModelBtn = document.getElementById('useModelBtn');
     const modelCards = document.querySelectorAll('.model-option-card');
+
+    // Scales the 412x732.44 (9:16) UI stage smoothly down on small screens and up on large screens
+    const BASE_WIDTH = 412;
+    let currentScale = 1;
+
+    function syncScale() {
+      const currentWidth = phoneWrapper.clientWidth;
+      if (currentWidth > 0) {
+        currentScale = currentWidth / BASE_WIDTH;
+        phoneContainer.style.transform = 'scale(' + currentScale + ')';
+      }
+    }
+
+    const resizeObserver = new ResizeObserver(syncScale);
+    resizeObserver.observe(phoneWrapper);
+    window.addEventListener('resize', syncScale);
+    syncScale();
 
     function closeAllOverlays() {
       phoneContainer.classList.remove('drawer-open', 'persona-open', 'model-open');
@@ -1271,14 +1309,14 @@ function buildJoylandPreviewHTML(customVarsData) {
       handleEl.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
         currentY = e.touches[0].clientY;
-        let diff = currentY - startY;
+        let diff = (currentY - startY) / currentScale;
         if (diff > 0) drawerEl.style.transform = 'translateY(' + diff + 'px)';
       }, {passive: true});
       handleEl.addEventListener('touchend', () => {
         if (!isDragging) return;
         isDragging = false;
         drawerEl.style.transition = 'transform 0.3s linear';
-        if (currentY - startY > 90) closeAllOverlays();
+        if ((currentY - startY) / currentScale > 90) closeAllOverlays();
         else drawerEl.style.transform = 'translateY(0)';
       });
     }
@@ -1290,27 +1328,10 @@ function buildJoylandPreviewHTML(customVarsData) {
 </html>`;
 }
 
-// Launch Preview Modal Window
-const previewModal = document.getElementById("previewModal");
-const previewIframe = document.getElementById("previewIframe");
-
-function openLivePreview(varsToUse) {
-  previewIframe.srcdoc = buildJoylandPreviewHTML(varsToUse);
-  previewModal.classList.add("active");
+// Register the Mobile Preview: 9:16 aspect ratio, 90% of the body height.
+if (typeof registerPreviewModule === "function") {
+  registerPreviewModule("mobile", buildJoylandPreviewHTML, {
+    aspectRatio: "9 / 16",
+    heightPercent: 90
+  });
 }
-
-document.getElementById("btnOpenPreviewMain").onclick = () => {
-  openLivePreview(state);
-};
-
-document.getElementById("btnPreviewInEdit").onclick = () => {
-  openLivePreview(stagingState);
-};
-
-document.getElementById("btnClosePreview").onclick = () => {
-  previewModal.classList.remove("active");
-};
-
-previewModal.addEventListener("click", (e) => {
-  if (e.target === previewModal) previewModal.classList.remove("active");
-});
