@@ -1,5 +1,5 @@
 // ===========================================================
-// PART 1: CORE LOGIC (Core-Logic.js)
+// PART 2: CORE LOGIC (Core_Logic.js)
 // ===========================================================
 
 // Custom Doraemon Alert Helper
@@ -84,7 +84,6 @@ function formatAspectRatioInfo(width, height, rule) {
   const simpH = Math.round(height / gcd);
   const actualDec = width / height;
 
-  // Express user's image relative to the required denominator/numerator for easy comparison
   const scaledW = (actualDec * rule.h).toFixed(2).replace(/\.00$/, "");
   const exactRatioStr = (simpW <= 50 && simpH <= 50) ? `${simpW}:${simpH}` : `~${scaledW}:${rule.h}`;
 
@@ -92,7 +91,6 @@ function formatAspectRatioInfo(width, height, rule) {
   const diffPct = ((Math.abs(diffDec) / rule.target) * 100).toFixed(1);
   const direction = diffDec > 0 ? "wider" : "taller";
 
-  // Calculate ideal pixel dimensions based on user's current width or height
   const idealWidthForHeight = Math.round(height * rule.target);
   const idealHeightForWidth = Math.round(width / rule.target);
   const pxDiffW = width - idealWidthForHeight;
@@ -160,7 +158,6 @@ function buildErrorCardHTML(err) {
     </div>`;
 }
 
-// Validates a single URL and returns a structured result (without firing alert if silent=true)
 function checkSingleImageUrl(key, rawUrl) {
   return new Promise((resolve) => {
     const clean = (rawUrl || "").trim();
@@ -270,7 +267,6 @@ function checkSingleImageUrl(key, rawUrl) {
   });
 }
 
-// Single-field helper that shows an alert immediately if invalid
 async function validateImageUrlAndRatio(key, rawUrl) {
   const result = await checkSingleImageUrl(key, rawUrl);
   if (!result.valid && result.errorObj) {
@@ -279,7 +275,6 @@ async function validateImageUrlAndRatio(key, rawUrl) {
   return result;
 }
 
-// Batch validator for multiple images at once — reports ALL mismatches in ONE combined alert
 async function validateBatchImages(items) {
   const results = await Promise.all(
     items.map(item => checkSingleImageUrl(item.key, item.rawImgLink))
@@ -437,7 +432,7 @@ function buildShadowCssString() {
 }
 
 /* -----------------------------------------------------------
-   PASTE CSS AUTO-PARSER & ASSIGNER (BATCH VALIDATES ALL IMAGES)
+   PASTE CSS AUTO-PARSER & ASSIGNER
 ------------------------------------------------------------ */
 async function parseAndAssignCSSBlock(rawCssText, targetStateObj) {
   const regex = /(--dora-[a-zA-Z0-9-]+)\s*:\s*([^;\}]+);?/g;
@@ -467,7 +462,6 @@ async function parseAndAssignCSSBlock(rawCssText, targetStateObj) {
     }
   }
 
-  // Validate all pasted image links in parallel and report all mismatches in ONE alert
   if (pendingImageChecks.length > 0) {
     const batchResults = await validateBatchImages(pendingImageChecks);
     batchResults.forEach(res => {
@@ -670,7 +664,6 @@ function buildEditForm() {
   let borderSectionHeaderAdded = false;
 
   Object.entries(stagingState).forEach(([key, val]) => {
-    // Gradient Editor
     if (key === "--dora-bg-gradient-1") {
       const sectionTitle = document.createElement("div");
       sectionTitle.className = "section-title";
@@ -820,7 +813,6 @@ function buildEditForm() {
       return;
     }
 
-    // Dedicated Border Cards
     if (key.includes("border")) {
       if (!borderSectionHeaderAdded) {
         const sectionTitle = document.createElement("div");
@@ -845,7 +837,6 @@ function buildEditForm() {
       const controlsGrid = document.createElement("div");
       controlsGrid.className = "border-controls-grid";
 
-      // Thickness with fixed px
       const thickGroup = document.createElement("div");
       thickGroup.className = "control-subgroup";
       const thickLabel = document.createElement("span");
@@ -866,7 +857,6 @@ function buildEditForm() {
       thickGroup.appendChild(thickLabel);
       thickGroup.appendChild(unitWrap);
 
-      // Type with Animated Custom Dropdown
       const typeGroup = document.createElement("div");
       typeGroup.className = "control-subgroup";
       const typeLabel = document.createElement("span");
@@ -881,7 +871,6 @@ function buildEditForm() {
       typeGroup.appendChild(typeLabel);
       typeGroup.appendChild(customTypeDropdown);
 
-      // Color
       const colorGroup = document.createElement("div");
       colorGroup.className = "control-subgroup";
       const colorLabel = document.createElement("span");
@@ -894,7 +883,6 @@ function buildEditForm() {
       colorGroup.appendChild(colorLabel);
       colorGroup.appendChild(colorInput);
 
-      // Swatch Button
       const swatchBtn = document.createElement("button");
       swatchBtn.type = "button";
       swatchBtn.className = "color-swatch-btn checker-pattern";
@@ -909,7 +897,6 @@ function buildEditForm() {
       controlsGrid.appendChild(colorGroup);
       controlsGrid.appendChild(swatchBtn);
 
-      // Live Preview Area
       const previewLine = document.createElement("div");
       previewLine.className = "border-preview-line";
       const previewBox = document.createElement("div");
@@ -953,7 +940,6 @@ function buildEditForm() {
       return;
     }
 
-    // Dedicated Multi-Layer Shadow Configurator
     if (key.includes("shadow")) {
       const sectionTitle = document.createElement("div");
       sectionTitle.className = "section-title";
@@ -1046,7 +1032,6 @@ function buildEditForm() {
         subGrid.appendChild(createUnitInput("Blur", layer.blur, (v) => layer.blur = Math.max(0, v)));
         subGrid.appendChild(createUnitInput("Spread", layer.spread, (v) => layer.spread = v));
 
-        // Animated Custom Dropdown for Inset / Drop
         const insetGrp = document.createElement("div");
         insetGrp.className = "control-subgroup";
         const insetLbl = document.createElement("span");
@@ -1128,7 +1113,6 @@ function buildEditForm() {
       return;
     }
 
-    // Direct Image & GIF Input with Live Format + Aspect Ratio Scanner
     if (key.includes("bg-img")) {
       const row = document.createElement("div");
       row.className = "var-row";
@@ -1201,7 +1185,6 @@ function buildEditForm() {
       return;
     }
 
-    // Standard Rows (Colors, Solids)
     const row = document.createElement("div");
     row.className = "var-row";
 
@@ -1269,7 +1252,6 @@ document.getElementById("btnCancelChanges").onclick = () => {
   editModal.classList.remove("active");
 };
 
-// Batch check all 3 image fields when Apply Changes is clicked in case user typed without blurring
 document.getElementById("btnApplyChanges").onclick = async () => {
   const imgInputs = document.querySelectorAll("input[data-img-var-key]");
   const batchToVerify = [];
@@ -1288,7 +1270,7 @@ document.getElementById("btnApplyChanges").onclick = async () => {
     const results = await validateBatchImages(batchToVerify);
     const hasAnyInvalid = results.some(r => !r.valid);
     if (hasAnyInvalid) {
-      return; // Keep modal open so user can fix the flagged images
+      return;
     }
     results.forEach(r => {
       if (r.valid) stagingState[r.key] = wrapImageUrl(r.url);
@@ -1618,6 +1600,147 @@ document.getElementById("btnSelectPickerColor").onclick = () => {
 
 pickerModal.addEventListener("click", (e) => {
   if (e.target === pickerModal) pickerModal.classList.remove("active");
+});
+
+/* -----------------------------------------------------------
+   MODULAR LIVE PREVIEW CONTROLLER
+   -----------------------------------------------------------
+   Each dummy UI module registers itself together with its NATIVE
+   design size: registerPreviewModule(mode, builderFn, { width, height }).
+
+   The preview container derives everything from that size:
+     1. The iframe is rendered at the dummy UI's native width x height.
+     2. A single scale factor is computed so the whole dummy UI fits the
+        screen (never upscaled past 1:1).
+     3. The wrapper is sized to exactly (width * scale) x (height * scale)
+        so the card's border hugs the dummy UI with no empty space.
+   Because the sizing lives in one place, new modes (PC, Tablet, ...)
+   only need to register their own native dimensions.
+------------------------------------------------------------ */
+window.DoraPreviewRegistry = window.DoraPreviewRegistry || {};
+let currentPreviewMode = "mobile";
+let currentPreviewVars = state;
+
+const previewModal = document.getElementById("previewModal");
+const previewModalCard = document.getElementById("previewModalCard");
+const previewModalHeader = document.getElementById("previewModalHeader");
+const previewIframeWrapper = document.getElementById("previewIframeWrapper");
+const previewIframe = document.getElementById("previewIframe");
+const previewModeSelectWrap = document.getElementById("previewModeSelectWrap");
+const previewModeTrigger = document.getElementById("previewModeTrigger");
+const previewModeLabel = document.getElementById("previewModeLabel");
+const previewModeItems = document.querySelectorAll(".preview-mode-item");
+
+const PREVIEW_VIEWPORT_MARGIN = 0.96;  // max share of the screen the card may use
+const PREVIEW_CARD_BORDER = 4;         // 2px border on each side of the card
+const PREVIEW_FALLBACK_HEADER_H = 54;  // used only if the header can't be measured
+
+// dimensions = { aspectRatio: "9 / 16", heightPercent: 90 }
+//   aspectRatio   -> width / height of the dummy UI
+//   heightPercent -> wrapper height as a percentage of the body (viewport) height
+function parseAspectRatio(str) {
+  const parts = String(str || "").split("/").map(s => parseFloat(s.trim()));
+  if (parts.length === 2 && parts[0] > 0 && parts[1] > 0) return parts[0] / parts[1];
+  if (parts.length === 1 && parts[0] > 0) return parts[0];
+  return 9 / 16;
+}
+
+function registerPreviewModule(mode, builderFn, dimensions) {
+  window.DoraPreviewRegistry[mode] = {
+    build: builderFn,
+    aspectRatio: dimensions.aspectRatio,
+    ratio: parseAspectRatio(dimensions.aspectRatio),
+    heightPercent: dimensions.heightPercent || 90
+  };
+}
+
+// Wrapper height = heightPercent of body height, width follows from aspect-ratio.
+// Clamped so the whole card (header + frame) and the width always stay on screen.
+function fitPreviewToDummyUI() {
+  const entry = window.DoraPreviewRegistry[currentPreviewMode];
+  if (!entry) return;
+
+  const headerH = previewModalHeader.offsetHeight || PREVIEW_FALLBACK_HEADER_H;
+  const wantedH = window.innerHeight * (entry.heightPercent / 100);
+
+  const maxH = window.innerHeight * PREVIEW_VIEWPORT_MARGIN - headerH - PREVIEW_CARD_BORDER;
+  const maxW = window.innerWidth * PREVIEW_VIEWPORT_MARGIN - PREVIEW_CARD_BORDER;
+
+  const finalH = Math.min(wantedH, maxH, maxW / entry.ratio);
+
+  previewIframeWrapper.style.aspectRatio = entry.aspectRatio;
+  previewIframeWrapper.style.height = `${finalH}px`;
+  previewIframeWrapper.style.width = `${finalH * entry.ratio}px`;
+}
+
+function openLivePreview(varsToUse, modeOverride) {
+  if (varsToUse) currentPreviewVars = varsToUse;
+  if (modeOverride) currentPreviewMode = modeOverride;
+
+  const entry = window.DoraPreviewRegistry[currentPreviewMode];
+  if (!entry) {
+    showDoraAlert(
+      "Preview Module Not Loaded",
+      `The <strong>${currentPreviewMode.toUpperCase()}</strong> preview module has not been added yet.`
+    );
+    return;
+  }
+
+  // Show first so the header can be measured, then size from the dummy UI's native dimensions
+  previewModal.classList.add("active");
+  fitPreviewToDummyUI();
+  previewIframe.srcdoc = entry.build(currentPreviewVars);
+}
+
+window.addEventListener("resize", () => {
+  if (previewModal.classList.contains("active")) fitPreviewToDummyUI();
+});
+
+// Custom Preview Mode Dropdown Events
+previewModeTrigger.addEventListener("click", (e) => {
+  e.stopPropagation();
+  previewModeSelectWrap.classList.toggle("open");
+});
+
+document.addEventListener("click", () => {
+  previewModeSelectWrap.classList.remove("open");
+});
+
+previewModeItems.forEach(item => {
+  item.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const chosenMode = item.dataset.mode;
+    previewModeSelectWrap.classList.remove("open");
+
+    // Only switch the selected state/label if that mode's module actually exists
+    if (!window.DoraPreviewRegistry[chosenMode]) {
+      openLivePreview(currentPreviewVars, chosenMode);
+      currentPreviewMode = previewModeItems.length ? document.querySelector(".preview-mode-item.selected").dataset.mode : "mobile";
+      return;
+    }
+
+    previewModeItems.forEach(el => el.classList.remove("selected"));
+    item.classList.add("selected");
+    previewModeLabel.textContent = item.textContent.trim();
+
+    openLivePreview(currentPreviewVars, chosenMode);
+  });
+});
+
+document.getElementById("btnOpenPreviewMain").onclick = () => {
+  openLivePreview(state);
+};
+
+document.getElementById("btnPreviewInEdit").onclick = () => {
+  openLivePreview(stagingState);
+};
+
+document.getElementById("btnClosePreview").onclick = () => {
+  previewModal.classList.remove("active");
+};
+
+previewModal.addEventListener("click", (e) => {
+  if (e.target === previewModal) previewModal.classList.remove("active");
 });
 
 // Initialize View
