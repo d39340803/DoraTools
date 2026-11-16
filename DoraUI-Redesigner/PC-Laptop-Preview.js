@@ -1931,13 +1931,13 @@ function buildJoylandPCPreviewHTML(customVarsData) {
 if (typeof registerPreviewModule === "function") {
   registerPreviewModule("pc", buildJoylandPCPreviewHTML, {
     aspectRatio: "16 / 10",
-    widthPercent: 75
+    widthPercent: 90
   });
 
   // Preserve widthPercent on the registry entry and extend fitPreviewToDummyUI
   // so width-driven modules (width: 90%, aspect-ratio: 16/10) size from viewport width
   if (window.DoraPreviewRegistry && window.DoraPreviewRegistry["pc"]) {
-    window.DoraPreviewRegistry["pc"].widthPercent = 75;
+    window.DoraPreviewRegistry["pc"].widthPercent = 90;
   }
 
   if (typeof fitPreviewToDummyUI === "function") {
