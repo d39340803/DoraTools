@@ -1332,6 +1332,6 @@ function buildJoylandPreviewHTML(customVarsData) {
 if (typeof registerPreviewModule === "function") {
   registerPreviewModule("mobile", buildJoylandPreviewHTML, {
     aspectRatio: "9 / 16",
-    heightPercent: 90
+    heightPercent: 78
   });
 }
